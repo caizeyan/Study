@@ -61,7 +61,7 @@ Shader "Unity Shaders Book/Chapter 7/Ramp Texture" {
 				fixed halfLambert  = 0.5 * dot(worldNormal, worldLightDir) + 0.5;
 				fixed3 diffuseColor = tex2D(_RampTex, fixed2(halfLambert, halfLambert)).rgb * _Color.rgb;
 				
-				fixed3 diffuse = _LightColor0.rgb * diffuseColor;
+				fixed3 diffuse = _LightColor0.rgb * _Color.rgb*tex2D(_RampTex, fixed2(halfLambert, halfLambert)).rgb;
 				
 				fixed3 viewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
 				fixed3 halfDir = normalize(worldLightDir + viewDir);

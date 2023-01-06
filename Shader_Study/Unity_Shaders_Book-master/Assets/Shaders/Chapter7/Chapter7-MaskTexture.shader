@@ -60,6 +60,7 @@ Shader "Unity Shaders Book/Chapter 7/Mask Texture" {
 			}
 			
 			fixed4 frag(v2f i) : SV_Target {
+			 	/*
 			 	fixed3 tangentLightDir = normalize(i.lightDir);
 				fixed3 tangentViewDir = normalize(i.viewDir);
 
@@ -67,11 +68,11 @@ Shader "Unity Shaders Book/Chapter 7/Mask Texture" {
 				tangentNormal.xy *= _BumpScale;
 				tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));
 
-				fixed3 albedo = tex2D(_MainTex, i.uv).rgb * _Color.rgb;
+				fixed3 albedo = tex2D(_MainTex, i.uv) * _Color;
 				
-				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
+				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT * albedo;
 				
-				fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(tangentNormal, tangentLightDir));
+				fixed3 diffuse = _LightColor0 * albedo * max(0, dot(tangentNormal, tangentLightDir));
 				
 			 	fixed3 halfDir = normalize(tangentLightDir + tangentViewDir);
 			 	// Get the mask value
@@ -79,7 +80,23 @@ Shader "Unity Shaders Book/Chapter 7/Mask Texture" {
 			 	// Compute specular term with the specular mask
 			 	fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(tangentNormal, halfDir)), _Gloss) * specularMask;
 			
-				return fixed4(ambient + diffuse + specular, 1.0);
+				return fixed4(ambient+diffuse, 1.0);
+			*/
+					fixed3 tangentView = normalize(i.viewDir);
+				fixed3 tangentLight = normalize(i.lightDir);
+				fixed3 tangentNormal = UnpackNormal(tex2D(_BumpMap,i.uv));
+				tangentNormal.xy *= _BumpScale;
+				tangentNormal.z = sqrt(1.0-saturate( dot(tangentNormal.xy,tangentNormal.xy)));
+
+				fixed3 albedo = _Color.rgb*tex2D(_MainTex,i.uv).rgb;
+				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT*albedo;
+
+				fixed3 diffuse = _LightColor0*albedo*max(0,dot(tangentLight,tangentNormal));
+
+				fixed3 halfDir = normalize(tangentView+tangentLight);
+				float specularScale = tex2D(_SpecularMask,i.uv).r*_SpecularScale;
+				fixed3 specular = _LightColor0*_Specular*pow(max(0,dot(tangentNormal,halfDir)),_Gloss)*specularScale;
+				return fixed4(ambient+diffuse+specular, 1.0);
 			}
 			
 			ENDCG

@@ -1,0 +1,26 @@
+﻿<Properties StartupConfiguration="{A0B0857B-82FB-E678-F78A-E84AE39B2445}|">
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Unity_Shaders_Book-master" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Shaders" expanded="True">
+                <Node name="Chapter7" expanded="True">
+                  <Node name="Chapter7-MaskTexture.shader" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="92698063-3641-4283-ac34-5beba22583c1" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
