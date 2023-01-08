@@ -11,7 +11,7 @@ Shader "CZY/Alpha Blend ZWrite" {
 		Tags {"Queue" = "Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
 		
 		Pass{
-			ZWrite Off
+			ZWrite On
 			ColorMask 0	
 		}
 		

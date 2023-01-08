@@ -14,7 +14,8 @@ Shader "Unity Shaders Book/Chapter 8/Blend Operations 0" {
 			
 			ZWrite Off
 			
-			Blend SrcAlpha OneMinusSrcAlpha, One Zero
+			BlendOp Max
+			Blend One One
 			
 			CGPROGRAM
 			
