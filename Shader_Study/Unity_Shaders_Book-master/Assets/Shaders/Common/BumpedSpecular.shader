@@ -57,7 +57,7 @@ Shader "Unity Shaders Book/Common/Bumped Specular" {
 			 	o.uv.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;
 			 	o.uv.zw = v.texcoord.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;
 
-				TANGENT_SPACE_ROTATION;
+				//TANGENT_SPACE_ROTATION;
 				
 				float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;  
                 fixed3 worldNormal = UnityObjectToWorldNormal(v.normal);  
