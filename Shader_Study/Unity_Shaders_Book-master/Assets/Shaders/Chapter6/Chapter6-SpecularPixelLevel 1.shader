@@ -50,17 +50,17 @@ Shader "CZY/Specular Pixel-Level" {
 	            return o;
 	        };
 	        
-	        fixed4 frag(v2f v):SV_TARGET{
+	        fixed4 frag(v2f i):SV_TARGET{
 	      
 	            fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT;
-	            fixed3 worldNormal = normalize(v.normal);
+	            fixed3 worldNormal = normalize(i.normal);
 	            fixed3 worldLight = normalize(_WorldSpaceLightPos0.xyz);
 	            fixed3 diffuse = _Diffuse*_LightColor0*saturate(dot(worldNormal,worldLight));
 	            
 	            //注意这里的worldLight为负
 	            fixed3 reflectDir = normalize( reflect(-worldLight,worldNormal));
 	            //注意这里需要顶点在世界坐标中位置 
-	            fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - v.worldPos.xyz);
+	            fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);
 	            fixed3 specular = _Specular*_LightColor0*pow( saturate(dot(reflectDir,viewDir)),_Gloss);
             	fixed3 color =  ambient + diffuse + specular;
 	            return fixed4(color,0);
